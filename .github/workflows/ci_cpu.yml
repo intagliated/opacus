@@ -62,7 +62,7 @@ jobs:
           name: unittest-py310-release-reports
           path: unittest-py310-release-reports
       - name: Send coverage to Coveralls (parallel)
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@v2.3.8
         with:
           format: cobertura
           parallel: true
@@ -93,7 +93,7 @@ jobs:
           name: unittest-py39-release-reports
           path: unittest-py39-release-reports
       - name: Send coverage to Coveralls (parallel)
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@v2.3.8
         with:
           format: cobertura
           parallel: true
@@ -171,7 +171,7 @@ jobs:
           name: mnist-cpu-reports
           path: runs/mnist/test-reports
       - name: Send coverage to Coveralls (parallel)
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@v2.3.8
         with:
           format: cobertura
           parallel: true
@@ -185,7 +185,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
       - name: Finish Coveralls Parallel
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@v2.3.8
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           parallel-finished: true
