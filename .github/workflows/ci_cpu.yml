@@ -14,14 +14,14 @@ on:
 jobs:
   ########### LINT ##############
   lint_py39_torch_release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v7
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.9'
+          python-version: '3.10'
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -36,7 +36,7 @@ jobs:
 
   ########### UNIT TESTS ##############
   unittest_py310_torch_release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -62,21 +62,21 @@ jobs:
           name: unittest-py310-release-reports
           path: unittest-py310-release-reports
       - name: Send coverage to Coveralls (parallel)
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@v2.3.8
         with:
           format: cobertura
           parallel: true
           flag-name: run-1
 
   unittest_py39_torch_release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v7
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: 3.9
+          python-version: 3.10
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -93,21 +93,21 @@ jobs:
           name: unittest-py39-release-reports
           path: unittest-py39-release-reports
       - name: Send coverage to Coveralls (parallel)
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@v2.3.8
         with:
           format: cobertura
           parallel: true
           flag-name: run-2
 
   prv_accountant_values:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v7
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: 3.9
+          python-version: 3.10
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -118,7 +118,7 @@ jobs:
 
   ########### NIGHTLY TEST ##############
   unittest_py39_torch_nightly:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: ${{ github.event_name == 'schedule' }}
     steps:
       - name: Checkout
@@ -126,7 +126,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: 3.9
+          python-version: 3.10
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -144,14 +144,14 @@ jobs:
 
   ########### INTEGRATION TEST ##############
   integrationtest_py39_torch_release_cpu:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v7
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: 3.9
+          python-version: 3.10
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -171,7 +171,7 @@ jobs:
           name: mnist-cpu-reports
           path: runs/mnist/test-reports
       - name: Send coverage to Coveralls (parallel)
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@v2.3.8
         with:
           format: cobertura
           parallel: true
@@ -180,12 +180,12 @@ jobs:
   ######## FINISH COVERALLS ##########
   finish_coveralls_parallel:
     needs: [unittest_py310_torch_release, unittest_py39_torch_release, integrationtest_py39_torch_release_cpu]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v7
       - name: Finish Coveralls Parallel
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@v2.3.8
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           parallel-finished: true
